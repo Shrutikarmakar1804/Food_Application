@@ -5,12 +5,17 @@ import { Button,
     Select, 
     TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const CreateIngredientForm = () => {
+    const { restaurant , ingredients } = useSelector(store=>store)
     const [formData, setFormData] = useState({
         Name:"",
-        ingredientCatagoryId:""});
-    const handleSubmit = () => {
+        ingredientCatagoryId:""
+    });
+    const handleSubmit = ( e ) => {
+            e.preventDefault()
+
 
         const data={
             name:formData.Name,
@@ -19,6 +24,7 @@ const CreateIngredientForm = () => {
             },
         };
         console.log(data);
+        
     };
         const handleInputChange = (e) => {
             const {name,value}=e.target
@@ -52,7 +58,7 @@ const CreateIngredientForm = () => {
                                       onChange={handleInputChange}
                                       name="ingredientCatagoryId"
                                     >
-                                      <MenuItem value={10}>Ten</MenuItem>
+                                      {<MenuItem value={10}>Ten</MenuItem>}
                                       <MenuItem value={20}>Twenty</MenuItem>
                                       <MenuItem value={30}>Thirty</MenuItem>
                                     </Select>

@@ -1,8 +1,5 @@
 import { api } from "../../config/api";
 import{
-CRAETE_CATEGORY_FAILURE,
-CRAETE_CATEGORY_REQUEST,
-CRAETE_CATEGORY_SUCCESS,
 CREATE_EVENT_FAILURE,
 CREATE_EVENT_REQUEST,
 CREATE_EVENT_SUCCESS,
@@ -36,16 +33,20 @@ CREATE_RESTAURANT_FAILURE,
 DELETE_RESTAURANT_REQUEST,
 DELETE_RESTAURANT_SUCCESS,
 DELETE_RESTAURANT_FAILURE,
-} from "./ActionTypes";
+CRAETE_CATEGORY_REQUEST,
+CRAETE_CATEGORY_SUCCESS,
+CRAETE_CATEGORY_FAILURE,
+
+} from "./ActionTypes"
 
 
-export const getAllRestaurantAction = (token) =>{
+ export const getAllRestaurantAction = (token) =>{
     return async(dispatch)=>{
         dispatch({type:GET_ALL_RESTAURANT_REQUEST});
         try{
             const {data} = await api.get(`/restaurant`,{
                 headers:{
-                    Authorizartion:`Bearer ${token}`
+                    Authorization:`Bearer ${token}`
     },
     });
     dispatch({type:GET_ALL_RESTAURANT_SUCCESS,payload:data});
@@ -56,14 +57,13 @@ export const getAllRestaurantAction = (token) =>{
             console.log("error",error);
         }
     }}
-
-    export const getRestaurantById=(reqData)=>{
+export const getRestaurantById=(reqData)=>{
         return async (dispatch)=>{
             dispatch({type:GET_RESTAURANT_BY_ID_REQUEST});
             try{
                 const responce =await api.get(`api/restaurant/${reqData.restaurantId}`,{
                     headers:{
-                        Authorizartion:`Bearer ${reqData.jwt}`,
+                        Authorization:`Bearer ${reqData.jwt}`,
     },
 });
 dispatch({type:GET_RESTAURANT_BY_ID_SUCCESS,payload:responce.data});
@@ -73,14 +73,13 @@ dispatch({type:GET_RESTAURANT_BY_ID_SUCCESS,payload:responce.data});
             };
         };
     };
-
-    export const getRestaurantByUserId=(jwt)=>{
+ export const getRestaurantByUserId=(jwt)=>{
         return async(dispatch)=>{
             dispatch({type:GET_RESTAURANT_BY_USER_ID_REQUEST});
             try{
                 const {data}=await api.get(`/api/admin/restaurant/user`,{
                     headers:{
-                        Authorizartion:`Bearer ${jwt}`,
+                        Authorization:`Bearer ${jwt}`,
     },
 });
 dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data});
@@ -92,14 +91,14 @@ dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data});
             };
         };
     };
-    export const createRestaurant=(reqData)=>{
+ export const createRestaurant=(reqData)=>{
         console.log("token----------",reqData.token);
         return async(dispatch)=>{
             dispatch({type:CREATE_RESTAURANT_REQUEST});
             try{
                 const {data}=await api.post(`/api/admin/restaurant`,reqData.data,{
                     headers:{
-                        Authorizartion:`Bearer ${reqData.token}`,
+                        Authorization:`Bearer ${reqData.token}`,
         },
     });
     dispatch({type:CREATE_RESTAURANT_SUCCESS,payload:data});
@@ -111,14 +110,13 @@ dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data});
             };
         };
     };
-
-    export const updateRestaurant=({restaurantId, restaurantData, jwt})=>{
+export const updateRestaurant=({restaurantId, restaurantData, jwt})=>{
         return async(dispatch)=>{
             dispatch({type:UPDATE_RESTAURANT_STATUS_REQUEST});
             try{
                 const responce =await api.put(`/api/admin/restaurant/${restaurantId}`,restaurantData,{
                     headers:{
-                        Authorizartion:`Bearer ${jwt}`,
+                        Authorization:`Bearer ${jwt}`,
         },
     });
     dispatch({type:UPDATE_RESTAURANT_STATUS_SUCCESS,payload:responce.data});
@@ -128,14 +126,13 @@ dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data});
 };
 };
 };
-
 export const deleteRestaurant=(restaurantId, jwt)=>{
     return async(dispatch)=>{
         dispatch({type:DELETE_RESTAURANT_REQUEST});
         try{
             const responce =await api.delete(`/api/admin/restaurant/${restaurantId}`,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 dispatch({type:DELETE_RESTAURANT_SUCCESS,payload:responce.restaurantId});
@@ -146,14 +143,13 @@ dispatch({type:DELETE_RESTAURANT_SUCCESS,payload:responce.restaurantId});
         };
     };
 };
-
 export const updateRestaurantStatus=({restaurantId,  jwt})=>{
     return async(dispatch)=>{
         dispatch({type:UPDATE_RESTAURANT_STATUS_REQUEST});
         try{
             const responce =await api.put(`/api/admin/restaurant/${restaurantId}/status`,{},{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 }
 );
@@ -173,7 +169,7 @@ export const createEventAction=({reqData, jwt, restaurantId})=>{
         try{
             const {data}=await api.post(`/api/admin/restaurant/${restaurantId}/event`,reqData,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 dispatch({type:CREATE_EVENT_SUCCESS,payload:data});
@@ -192,7 +188,7 @@ export const getAllEvent=({jwt})=>{
         try{
             const {responce}=await api.get(`/api/event`,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 console.log("get all event",responce.data);
@@ -212,7 +208,7 @@ export const deleteEventAction=({eventId, jwt})=>{
         try{
             const {responce}=await api.delete(`/api/admin/event/${eventId}`,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 console.log("delete event",responce.data);
@@ -231,7 +227,7 @@ export const getRestaurantEvent=({restaurantId, jwt})=>{
         try{
             const {responce}=await api.get(`/api/admin/restaurant/${restaurantId}/event`,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 console.log("get restaurant event",responce.data);
@@ -245,24 +241,27 @@ console.log("restaurant event",responce.data);
     };
 };
 
-export const createCategoryAction=({reqData, jwt, restaurantId})=>{
-    return async(dispatch)=>{
-        dispatch({type:CRAETE_CATEGORY_REQUEST});
-        try{
-            const {responce}=await api.post(`/api/admin/restaurant/${restaurantId}/category`,reqData,{
-                headers:{
-                    Authorizartion:`Bearer ${jwt}`,
-    },
-});
-console.log("create category",responce.data);
-dispatch({type:CRAETE_CATEGORY_SUCCESS,payload:responce.data});
-console.log("create category",responce.data);
+export const createCategoryAction = ({ reqData, jwt, restaurantId }) => {
+    return async (dispatch) => {
+        dispatch({ type: CRAETE_CATEGORY_REQUEST });
+        try {
+            const { responce } = await api.post(
+                `/api/admin/restaurant/${restaurantId}/category`,
+                reqData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }
+            );
+            console.log("create category", responce.data);
+            dispatch({ type: CRAETE_CATEGORY_SUCCESS, payload: responce.data });
+            console.log("create category", responce.data);
+        } catch (error) {
+            console.log("catch -", error);
+            dispatch({ type: CRAETE_CATEGORY_FAILURE, payload: error });
+            console.log("error", error);
         }
-        catch(error){
-            console.log("catch -",error);
-            dispatch({type:CRAETE_CATEGORY_FAILURE,payload:error});
-            console.log("error",error);
-        };
     };
 };
 
@@ -272,7 +271,7 @@ export const getRestaurantCategory=({restaurantId, jwt})=>{
         try{
             const {responce}=await api.get(`/api/admin/restaurant/${restaurantId}/category`,{
                 headers:{
-                    Authorizartion:`Bearer ${jwt}`,
+                    Authorization:`Bearer ${jwt}`,
     },
 });
 console.log("get restaurant category",responce.data);

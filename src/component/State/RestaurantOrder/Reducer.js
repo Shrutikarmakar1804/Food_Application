@@ -1,4 +1,4 @@
-import { GET_RESTAURANT_ORDER_FAILURE, GET_RESTAURANT_ORDER_REQEST, GET_RESTAURANT_ORDER_SUCCESS, UPDATE_ORDER_STATUS_FAILURE, UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS } from "./ActionTypes";
+import { GET_RESTAURANT_ORDER_FAILURE, GET_RESTAURANT_ORDER_REQEST, GET_RESTAURANT_ORDER_REQUEST, GET_RESTAURANT_ORDER_SUCCESS, UPDATE_ORDER_STATUS_FAILURE, UPDATE_ORDER_STATUS_REQUEST, UPDATE_ORDER_STATUS_SUCCESS } from "./ActionTypes";
 
 const initialState = {
     loading: false,
@@ -8,7 +8,7 @@ const initialState = {
 
 const restaurantOrderReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_RESTAURANT_ORDER_REQEST:
+        case GET_RESTAURANT_ORDER_REQUEST:
             case UPDATE_ORDER_STATUS_REQUEST:
             return {
                 ...state,

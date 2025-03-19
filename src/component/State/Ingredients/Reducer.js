@@ -1,4 +1,4 @@
-import { CREATE_INGREDIENTS_CATEGORY_SUCCESS, CREATE_INGREDIENTS_SUCCESS, GET_INGREDIENTS, GET_INGREDIENTS_CATEGORY_SUCCESS, UPDATE_STOCK } from "./ActionTypes";
+import { CREATE_INGREDIENTS_CATEGORY_SUCCESS, CREATE_INGREDIENTS_SUCCESS, GET_INGREDIENTS, GET_INGREDIENTS_CATEGORY_SUCCESS, UPDATE_STOCK, UPDATE_STOCK_OF_INGREDIENT_SUCCESS } from "./ActionTypes";
 
 const initialState = {
     ingredients: [],
@@ -28,7 +28,7 @@ export const ingredientReducer = (state = initialState, action) => {
                             ...state,
                             ingredients: [...state.ingredients, action.payload],
                         };
-                        case UPDATE_STOCK:
+                        case UPDATE_STOCK_OF_INGREDIENT_SUCCESS:
                             return {
                                 ...state,
                                 update: action.payload,
