@@ -2,7 +2,7 @@ import { api } from "../../config/api";
 import { CREATE_INGREDIENTS_CATEGORY_SUCCESS, CREATE_INGREDIENTS_SUCCESS, GET_INGREDIENTS, GET_INGREDIENTS_CATEGORY_SUCCESS, UPDATE_STOCK_OF_INGREDIENT_SUCCESS } from "./ActionTypes";
 
 
-export const getIncrediantsOfRestaurant = (id, jwt) => {
+export const getIngrediantsOfRestaurant = (id, jwt) => {
     return async (dispatch) => {
         try {
             const response = await api.get(`/api/admin/restaurant/${id}/ingredients`, {

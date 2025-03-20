@@ -3,11 +3,16 @@ import React from 'react'
 import CreateIcon from '@mui/icons-material/Create';
 import { Delete } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 const orders=[{id: 1}, {id: 2}, {id: 3}];
  
 
 export default function MenuTable() {
+
+  const { restaurant , ingredients } = useSelector(store => store)
+    const dispatch = useDispatch(); 
+    const jwt = localStorage.getItem("jwt");
 
   const navigate = useNavigate();
    const [ open, setOpen] = React.useState(false);

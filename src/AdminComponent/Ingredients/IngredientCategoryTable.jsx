@@ -1,7 +1,7 @@
 import { Box, Card, CardHeader, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React, { useEffect } from 'react'
 import CreateIcon from '@mui/icons-material/Create';
-import CreateIngredientCategoryForm from './CreateIngredientCatagoryForm';
+import CreateIngredientCategoryForm from './CreateIngredientCategoryForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientCategory } from '../../component/State/Ingredients/Action';
 
